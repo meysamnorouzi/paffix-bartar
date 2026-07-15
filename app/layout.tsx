@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import "@fontsource/vazirmatn/300.css";
 import "@fontsource/vazirmatn/400.css";
 import "@fontsource/vazirmatn/500.css";
 import "@fontsource/vazirmatn/700.css";
@@ -8,11 +9,10 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "کفش‌پلاس | فروشگاه تخصصی کفش",
-    template: "%s | کفش‌پلاس",
+    default: "پافیکس برتر | فروشگاه تخصصی کفش",
+    template: "%s | پافیکس برتر",
   },
-  description:
-    "فروشگاه تخصصی کفش با بهترین برندهای جهانی. ارسال سریع، ضمانت اصالت و پشتیبانی ۲۴ ساعته.",
+  description: "پافیکس برتر، فروشگاه تخصصی کفش با طراحی بادوام و راحت.",
 };
 
 export default function RootLayout({

@@ -3,42 +3,41 @@ import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[520px] overflow-hidden sm:min-h-[600px] lg:min-h-[680px]">
+    <section className="relative h-[754px] overflow-hidden bg-[#1d1d1d]">
       <Image
-        src="https://images.unsplash.com/photo-1606107557195-0a74c4b6264b?w=1920&q=80"
-        alt="کفش اسپرت مشکی"
+        src="/eye/Rectangle 1.png"
+        alt="کفش چرمی مشکی پافیکس برتر"
         fill
         priority
         className="object-cover"
         sizes="100vw"
       />
-      <div className="absolute inset-0 bg-gradient-to-l from-black/70 via-black/40 to-transparent" />
 
-      <div className="relative mx-auto flex h-full min-h-[520px] max-w-7xl items-center px-4 sm:min-h-[600px] sm:px-6 lg:min-h-[680px] lg:px-8">
-        <div className="max-w-xl">
-          <p className="mb-3 text-sm font-medium tracking-wide text-blue-200 sm:text-base">
-            کیفیت برتر، دوام ماندگار
-          </p>
-          <h1 className="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
-            برای سال‌ها،
-            <br />
-            نه برای یک فصل
+      <div className="relative mx-auto h-full max-w-[1296px] px-4">
+        <div className="absolute right-[120px] top-[247px] hidden text-right text-white md:block">
+          <h1 className="text-[40px] font-medium leading-[1.45] tracking-normal">
+            برای سال ها، نه برای یک فصل
           </h1>
-          <p className="mt-4 max-w-md text-sm leading-7 text-gray-200 sm:text-base">
-            کفش‌هایی که با شما قدم می‌زنند. از پیاده‌روی روزانه تا ورزش حرفه‌ای،
-            با بهترین برندهای جهان.
-          </p>
           <Link
             href="/products"
-            className="mt-8 inline-flex items-center rounded-full bg-accent px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-hover"
+            className="mt-[72px] inline-flex h-[54px] min-w-[196px] items-center justify-center rounded-full bg-[#2f72b9] px-8 text-[14px] font-normal text-white transition-colors hover:bg-[#235f9c]"
           >
             مشاهده محصولات
           </Link>
         </div>
-      </div>
 
-      <div className="pointer-events-none absolute bottom-8 left-8 hidden h-24 w-24 border border-white/30 lg:block" />
-      <div className="pointer-events-none absolute top-24 right-8 hidden h-16 w-16 border border-white/20 lg:block" />
+        <div className="absolute left-[75px] top-[258px] hidden items-end gap-4 text-white/90 lg:flex">
+          <span className="text-[16px] font-light">جدید ترین محصول</span>
+          <span className="mb-2 block h-px w-[125px] bg-white/70" />
+          <span className="block h-[58px] w-px bg-white/70" />
+        </div>
+
+        <div className="absolute bottom-[65px] right-[378px] hidden items-end gap-4 text-white/50 lg:flex">
+          <span className="block h-[44px] w-px bg-white/40" />
+          <span className="mb-2 block h-px w-[100px] bg-white/40" />
+          <span className="text-[13px] font-light">طراحی شده برای راحتی</span>
+        </div>
+      </div>
     </section>
   );
 }

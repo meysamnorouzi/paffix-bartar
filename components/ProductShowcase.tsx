@@ -1,49 +1,73 @@
+import Image from "next/image";
 import Link from "next/link";
-import { products } from "@/lib/data";
-import ProductCard from "./ProductCard";
 
-interface ProductShowcaseProps {
-  limit?: number;
-  showViewAll?: boolean;
-}
+const products = [
+  {
+    title: "نایک V5K",
+    tag: "زنانه",
+    image: "/eye/Rectangle 40053.png",
+  },
+  {
+    title: "نایک V5K",
+    tag: "زنانه",
+    image: "/eye/Rectangle 40053 (1).png",
+  },
+  {
+    title: "نایک V5K",
+    tag: "مردانه و زنانه",
+    image: "/eye/Rectangle 40053 (2).png",
+  },
+  {
+    title: "نایک V5K",
+    tag: "مردانه",
+    image: "/eye/Rectangle 40053 (3).png",
+  },
+];
 
-export default function ProductShowcase({
-  limit = 4,
-  showViewAll = true,
-}: ProductShowcaseProps) {
-  const displayedProducts = products.slice(0, limit);
-
+export default function ProductShowcase() {
   return (
-    <section className="bg-gray-light py-16 sm:py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-8 flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-navy sm:text-3xl">محصولات</h2>
-          {showViewAll && (
-            <Link
-              href="/products"
-              className="text-sm font-medium text-accent transition-colors hover:text-accent-hover"
-            >
-              مشاهده همه
-            </Link>
-          )}
+    <section className="bg-white pb-[168px]">
+      <div className="mx-auto max-w-[1296px] px-4">
+        <div className="mb-[58px] flex items-center justify-between">
+          <div className="flex items-center gap-8 text-[22px] text-[#111827]">
+            <button type="button" aria-label="قبلی" className="leading-none">
+              ←
+            </button>
+            <button type="button" aria-label="بعدی" className="leading-none">
+              →
+            </button>
+          </div>
+          <h2 className="text-[28px] font-medium leading-none text-black">
+            محصولات
+          </h2>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 lg:grid-cols-4">
-          {displayedProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+        <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
+          {products.map((product) => (
+            <Link
+              key={product.image}
+              href="/products"
+              className="group block overflow-hidden"
+            >
+              <div className="relative h-[514px] overflow-hidden rounded-[14px] bg-[#f2f3f5]">
+                <Image
+                  src={product.image}
+                  alt={product.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  sizes="(max-width: 1024px) 50vw, 300px"
+                />
+                <span className="absolute right-5 top-5 text-[14px] font-light text-[#2f72b9]">
+                  {product.tag}
+                </span>
+              </div>
+              <div className="mt-4 flex items-center justify-between px-1 text-[17px] text-black">
+                <span>{product.title}</span>
+                <span>ء</span>
+              </div>
+            </Link>
           ))}
         </div>
-
-        {showViewAll && (
-          <div className="mt-8 text-center sm:hidden">
-            <Link
-              href="/products"
-              className="inline-flex rounded-full border border-accent px-6 py-2.5 text-sm font-medium text-accent transition-colors hover:bg-accent hover:text-white"
-            >
-              مشاهده همه محصولات
-            </Link>
-          </div>
-        )}
       </div>
     </section>
   );

@@ -3,32 +3,33 @@ import Link from "next/link";
 
 export default function ManufacturingSection() {
   return (
-    <section className="relative min-h-[400px] overflow-hidden sm:min-h-[480px]">
+    <section className="relative h-[443px] overflow-hidden">
       <Image
-        src="https://images.unsplash.com/photo-1556906781-9a412961c28c?w=1920&q=80"
-        alt="کارگاه تولید کفش"
+        src="/eye/Frame 1430104262.png"
+        alt="کارخانه تولیدی پافیکس برتر"
         fill
         className="object-cover"
         sizes="100vw"
       />
-      <div className="absolute inset-0 bg-navy/80" />
-
-      <div className="relative mx-auto flex min-h-[400px] max-w-3xl flex-col items-center justify-center px-4 py-16 text-center sm:min-h-[480px] sm:px-6">
-        <h2 className="text-2xl font-bold text-white sm:text-3xl lg:text-4xl">
-          کیفیت ساخت، افتخار ما
+      <div className="relative mx-auto flex h-full max-w-[1296px] flex-col items-center justify-center px-4 text-center text-white">
+        <h2 className="max-w-[805px] text-[32px] font-medium leading-[1.65]">
+          پافیکس برتر بیش از ۱۰ سال تجربه در صنعت کفش، تولید کننده محصولات با
+          کیفیت و ماندگار است
         </h2>
-        <p className="mt-6 text-sm leading-8 text-gray-200 sm:text-base">
-          ما با همکاری بهترین کارگاه‌های تولید کفش در جهان، محصولاتی با بالاترین
-          استانداردهای کیفیت ارائه می‌دهیم. هر جفت کفش پیش از ارسال، از نظر
-          دوام، راحتی و ظاهر بررسی می‌شود تا تجربه‌ای بی‌نقص برای شما فراهم
-          شود.
-        </p>
-        <Link
-          href="/about"
-          className="mt-8 inline-flex rounded-full bg-accent px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-hover"
-        >
-          بیشتر بدانید
-        </Link>
+        <div className="mt-8 flex items-center gap-5">
+          <Link
+            href="/products"
+            className="inline-flex h-[48px] min-w-[150px] items-center justify-center rounded-full bg-[#2f72b9] px-6 text-[14px] text-white"
+          >
+            مشاهده محصولات
+          </Link>
+          <Link
+            href="/about"
+            className="inline-flex h-[48px] min-w-[118px] items-center justify-center rounded-full border border-white/70 px-6 text-[14px] text-white"
+          >
+            درباره ما
+          </Link>
+        </div>
       </div>
     </section>
   );

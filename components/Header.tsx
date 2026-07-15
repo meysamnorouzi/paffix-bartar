@@ -1,62 +1,41 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Search, ShoppingCart, User, Menu } from "lucide-react";
-import { navLinks } from "@/lib/data";
 
 export default function Header() {
+  const navLinks = [
+    { href: "/", label: "خانه" },
+    { href: "/products", label: "محصولات" },
+    { href: "/about", label: "درباره ما" },
+    { href: "/contact", label: "ارتباط با ما" },
+  ];
+
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-border bg-white/95 shadow-sm backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl font-bold text-navy sm:text-2xl">
-            کفش<span className="text-accent">پلاس</span>
-          </span>
+    <header className="absolute inset-x-0 top-6 z-50 px-4">
+      <div className="mx-auto flex h-[58px] max-w-[1296px] items-center justify-between rounded-[10px] bg-white px-8 shadow-[0_8px_30px_rgba(0,0,0,0.16)]">
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/eye/logo.png"
+            alt="پافیکس برتر"
+            width={83}
+            height={50}
+            priority
+            className="h-[38px] w-auto"
+          />
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-12 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-gray-600 transition-colors hover:text-accent"
+              className="text-[15px] font-normal text-[#222733] transition-colors hover:text-accent"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-2 sm:gap-4">
-          <button
-            type="button"
-            aria-label="جستجو"
-            className="rounded-full p-2 text-gray-600 transition-colors hover:bg-gray-light hover:text-accent"
-          >
-            <Search className="h-5 w-5" />
-          </button>
-          <button
-            type="button"
-            aria-label="حساب کاربری"
-            className="hidden rounded-full p-2 text-gray-600 transition-colors hover:bg-gray-light hover:text-accent sm:block"
-          >
-            <User className="h-5 w-5" />
-          </button>
-          <button
-            type="button"
-            aria-label="سبد خرید"
-            className="relative rounded-full p-2 text-gray-600 transition-colors hover:bg-gray-light hover:text-accent"
-          >
-            <ShoppingCart className="h-5 w-5" />
-            <span className="absolute -top-0.5 -left-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-accent text-[10px] font-bold text-white">
-              ۲
-            </span>
-          </button>
-          <button
-            type="button"
-            aria-label="منو"
-            className="rounded-full p-2 text-gray-600 transition-colors hover:bg-gray-light md:hidden"
-          >
-            <Menu className="h-5 w-5" />
-          </button>
-        </div>
+        <div className="h-8 w-[83px]" aria-hidden="true" />
       </div>
     </header>
   );

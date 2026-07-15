@@ -1,90 +1,45 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Send } from "lucide-react";
 import { InstagramIcon, TelegramIcon } from "@/components/SocialIcons";
-import { footerLinks } from "@/lib/data";
+
+const accessLinks = ["محصولات", "کالکشن‌ها", "درباره ما", "ارتباط با ما"];
 
 export default function Footer() {
   return (
-    <footer className="bg-navy-dark text-white">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
-          <div className="lg:col-span-1">
-            <Link href="/" className="inline-block">
-              <span className="text-2xl font-bold">
-                کفش<span className="text-accent">پلاس</span>
-              </span>
-            </Link>
-            <p className="mt-4 text-sm leading-7 text-gray-300">
-              فروشگاه تخصصی کفش با بیش از ۱۰ سال سابقه. ارائه بهترین برندهای
-              جهانی با ضمانت اصالت و ارسال سریع به سراسر کشور.
+    <footer className="bg-[#061520] text-white">
+      <div className="mx-auto max-w-[1296px] px-4 pb-6 pt-[75px]">
+        <div className="grid gap-12 text-right sm:grid-cols-2 lg:grid-cols-[1fr_1.4fr_1.4fr_1fr] lg:gap-[68px]">
+          <div className="order-last flex items-center justify-center lg:order-none lg:justify-start">
+            <Image src="/eye/logo.png" alt="پافیکس برتر" width={166} height={100} className="h-auto w-[166px] brightness-0 invert" />
+          </div>
+
+          <div>
+            <h3 className="border-b border-white/15 pb-3 text-[15px] font-medium">آدرس کارخانه</h3>
+            <p className="mt-5 text-[12px] leading-7 text-white/55">
+              تهران، چهاردانگه، شهرک صنعتی چهاردانگه، خیابان صنعت، پلاک ۱۲
             </p>
-            <div className="mt-6 flex gap-3">
-              <a
-                href="#"
-                aria-label="اینستاگرام"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-accent"
-              >
-                <InstagramIcon className="h-4 w-4" />
-              </a>
-              <a
-                href="#"
-                aria-label="تلگرام"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-accent"
-              >
-                <TelegramIcon className="h-4 w-4" />
-              </a>
-              <a
-                href="#"
-                aria-label="توییتر"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-accent"
-              >
-                <Send className="h-4 w-4" />
-              </a>
+          </div>
+
+          <div>
+            <h3 className="border-b border-white/15 pb-3 text-[15px] font-medium">راه‌های ارتباطی</h3>
+            <div className="mt-5 space-y-3 text-[12px] text-white/55">
+              <p>تلفن: ۰۲۱-۵۵۵۵۱۲۱۲</p>
+              <p>موبایل: ۰۹۱۲۱۲۳۴۵۶۷</p>
+              <div className="flex items-center gap-3 pt-1">
+                <span>شبکه‌های مجازی</span>
+                <a href="#" aria-label="اینستاگرام" className="text-[#f15a83]"><InstagramIcon className="h-[18px] w-[18px]" /></a>
+                <a href="#" aria-label="تلگرام" className="text-[#37aee2]"><TelegramIcon className="h-[18px] w-[18px]" /></a>
+              </div>
             </div>
           </div>
 
           <div>
-            <h3 className="mb-4 text-sm font-bold">فروشگاه</h3>
-            <ul className="space-y-3">
-              {footerLinks.shop.map((link) => (
-                <li key={link.href + link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-gray-300 transition-colors hover:text-white"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="mb-4 text-sm font-bold">پشتیبانی</h3>
-            <ul className="space-y-3">
-              {footerLinks.support.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-gray-300 transition-colors hover:text-white"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="mb-4 text-sm font-bold">شرکت</h3>
-            <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-gray-300 transition-colors hover:text-white"
-                  >
-                    {link.label}
+            <h3 className="border-b border-white/15 pb-3 text-[15px] font-medium">دسترسی‌ها</h3>
+            <ul className="mt-5 space-y-3 text-[12px] text-white/55">
+              {accessLinks.map((label, index) => (
+                <li key={label}>
+                  <Link href={index === 0 ? "/products" : index === 3 ? "#contact" : "#"} className="transition-colors hover:text-white">
+                    {label}
                   </Link>
                 </li>
               ))}
@@ -92,11 +47,9 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-white/10 pt-8 text-center">
-          <p className="text-sm text-gray-400">
-            © ۱۴۰۴ کفش‌پلاس. تمامی حقوق محفوظ است.
-          </p>
-        </div>
+        <p className="mt-[72px] border-t border-white/10 pt-5 text-center text-[10px] text-white/25">
+          تمامی حقوق مادی و معنوی این وب‌سایت متعلق به پافیکس برتر است.
+        </p>
       </div>
     </footer>
   );

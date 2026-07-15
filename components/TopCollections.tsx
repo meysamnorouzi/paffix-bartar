@@ -1,39 +1,52 @@
 import Image from "next/image";
 import Link from "next/link";
-import { collections } from "@/lib/data";
-import { formatPrice } from "@/lib/utils";
+
+const collections = [
+  {
+    title: "نایک V5K",
+    image: "/eye/2.png",
+  },
+  {
+    title: "نایک V5K",
+    image: "/eye/Rectangle 40053 (1).png",
+  },
+];
 
 export default function TopCollections() {
   return (
-    <section className="bg-white py-16 sm:py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <h2 className="mb-8 text-2xl font-bold text-navy sm:mb-10 sm:text-3xl">
-          کلکسیون‌های برتر
-        </h2>
+    <section className="bg-white pb-[164px] pt-[116px]">
+      <div className="mx-auto max-w-[1296px] px-4">
+        <div className="mb-[62px] flex items-center justify-between">
+          <div className="flex items-center gap-8 text-[22px] text-[#111827]">
+            <button type="button" aria-label="قبلی" className="leading-none">
+              ←
+            </button>
+            <button type="button" aria-label="بعدی" className="leading-none">
+              →
+            </button>
+          </div>
+          <h2 className="text-[28px] font-medium leading-none text-black">
+            کالکشن های برتر
+          </h2>
+        </div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {collections.map((collection) => (
             <Link
-              key={collection.id}
-              href={`/products?collection=${collection.slug}`}
-              className="group relative aspect-[3/4] overflow-hidden rounded-xl sm:aspect-[4/5]"
+              key={collection.image}
+              href="/products"
+              className="group relative h-[598px] overflow-hidden rounded-[14px]"
             >
               <Image
                 src={collection.image}
-                alt={collection.name}
+                alt={collection.title}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
-                sizes="(max-width: 640px) 100vw, 50vw"
+                sizes="(max-width: 768px) 100vw, 636px"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              <div className="absolute bottom-6 right-6 text-white">
-                <h3 className="text-lg font-bold sm:text-xl">
-                  {collection.name}
-                </h3>
-                <p className="mt-1 text-sm font-medium text-blue-200">
-                  از {formatPrice(collection.price)}
-                </p>
-              </div>
+              <span className="absolute bottom-8 left-8 text-[20px] font-medium text-white">
+                {collection.title}
+              </span>
             </Link>
           ))}
         </div>
