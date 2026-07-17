@@ -1,36 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
-export default function ManufacturingSection() {
-  return (
-    <section className="relative h-[443px] overflow-hidden">
-      <Image
-        src="/eye/Frame 1430104262.png"
-        alt="کارخانه تولیدی پافیکس برتر"
-        fill
-        className="object-cover"
-        sizes="100vw"
-      />
-      <div className="relative mx-auto flex h-full max-w-[1296px] flex-col items-center justify-center px-4 text-center text-white">
-        <h2 className="max-w-[805px] text-[32px] font-medium leading-[1.65]">
-          پافیکس برتر بیش از ۱۰ سال تجربه در صنعت کفش، تولید کننده محصولات با
-          کیفیت و ماندگار است
-        </h2>
-        <div className="mt-8 flex items-center gap-5">
-          <Link
-            href="/products"
-            className="inline-flex h-[48px] min-w-[150px] items-center justify-center rounded-full bg-[#2f72b9] px-6 text-[14px] text-white"
-          >
-            مشاهده محصولات
-          </Link>
-          <Link
-            href="/about"
-            className="inline-flex h-[48px] min-w-[118px] items-center justify-center rounded-full border border-white/70 px-6 text-[14px] text-white"
-          >
-            درباره ما
-          </Link>
-        </div>
-      </div>
-    </section>
-  );
-}
+export default function ManufacturingSection(){return <section className="relative h-[443px] overflow-hidden"><Image src="/eye/Frame 1430104262.png" alt="کارخانه پافیکس برتر" fill className="object-cover" sizes="100vw"/><div className="relative mx-auto flex h-full max-w-[1296px] flex-col items-center justify-center px-5 text-center text-white"><h2 className="max-w-[800px] text-[25px] font-medium leading-[1.7] sm:text-[32px]">پافیکس برتر با بیش از ۱۰ سال تجربه در صنعت کفش،<br className="hidden sm:block"/> تولیدکننده محصولات باکیفیت و ماندگار است.</h2><div className="mt-[35px] flex items-center gap-5"><Link href="/products" className="flex h-[48px] items-center gap-2 rounded-full bg-[#2f72b9] px-7 text-[13px]">مشاهده محصولات <ArrowLeft className="h-4 w-4"/></Link><Link href="/about" className="flex h-[48px] items-center gap-2 rounded-full border border-white/70 px-7 text-[13px]">درباره ما <ArrowLeft className="h-4 w-4"/></Link></div></div></section>}

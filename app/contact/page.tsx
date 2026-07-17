@@ -1,151 +1,37 @@
 import type { Metadata } from "next";
-import PageHeader from "@/components/PageHeader";
-import FAQ from "@/components/FAQ";
-import { contactInfo, faqItems } from "@/lib/data";
-import { Phone, Mail, MapPin } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { ChevronLeft, Clock3, Headphones, MapPin, Phone } from "lucide-react";
 import { InstagramIcon, TelegramIcon } from "@/components/SocialIcons";
+import { MapArtwork } from "@/components/ContactSection";
 
-export const metadata: Metadata = {
-  title: "تماس با ما",
-  description: "راه‌های ارتباطی با فروشگاه کفش‌پلاس. آدرس، تلفن و فرم تماس.",
-};
+export const metadata: Metadata = { title: "ارتباط با ما", description: "راه‌های ارتباط با کارخانه پافیکس برتر" };
+
+const cards = [
+  { title: "اطلاعیه‌ها و تخفیف‌ها", icon: <span className="grid h-16 w-16 place-items-center rounded-full bg-white shadow"><span className="h-9 w-9 bg-[conic-gradient(#1fcf94,#25b9e9,#6345d8,#ff315a,#ffb000,#1fcf94)] [clip-path:polygon(50%_0,93%_25%,93%_75%,50%_100%,7%_75%,7%_25%)]"/></span> },
+  { title: "جدیدترین محصولات", icon: <span className="grid h-16 w-16 place-items-center rounded-full bg-[#28a8e8] text-white"><TelegramIcon className="h-9 w-9"/></span> },
+  { title: "گفت‌وگو با کارشناسان", icon: <span className="grid h-16 w-16 place-items-center rounded-full bg-[#22c65b] text-white"><Phone className="h-8 w-8"/></span> },
+  { title: "استایل‌های روز", icon: <span className="grid h-16 w-16 place-items-center rounded-full bg-gradient-to-tr from-[#ffc928] via-[#e62878] to-[#7149cc] text-white"><InstagramIcon className="h-9 w-9"/></span> },
+];
+
+function WhatsAppIcon() {
+  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="h-10 w-10" aria-hidden="true"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.6 7.4L3 20.5l1.4-4.7A8.5 8.5 0 1 1 20.5 11.7Z"/><path d="M8.1 7.7c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.8 1.9c.1.3.1.5-.1.7l-.7.8c-.2.2-.2.4-.1.6.6 1.2 1.6 2.1 2.8 2.8.2.1.4.1.6-.1l.9-1c.2-.2.4-.2.7-.1l2 .9c.3.1.4.3.4.5 0 .5-.2 1.5-.8 2-.5.5-1.3.8-2.1.7-1.1-.1-2.8-.7-4.8-2.5-2.3-2-3.5-4.4-3.6-5.6 0-.7.2-1.2.5-1.6Z"/></svg>;
+}
 
 export default function ContactPage() {
-  return (
-    <>
-      <PageHeader
-        title="تماس با ما"
-        description="ما همیشه آماده پاسخگویی به سوالات شما هستیم."
-        breadcrumb="خانه / تماس با ما"
-      />
-
-      <section className="py-12 sm:py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-            <div>
-              <h2 className="mb-6 text-xl font-bold text-navy">
-                اطلاعات تماس
-              </h2>
-              <ul className="space-y-5">
-                <li className="flex items-start gap-3">
-                  <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-accent" />
-                  <span className="text-sm leading-7 text-gray-600 sm:text-base">
-                    {contactInfo.address}
-                  </span>
-                </li>
-                <li className="flex items-center gap-3">
-                  <Phone className="h-5 w-5 shrink-0 text-accent" />
-                  <div className="text-sm text-gray-600 sm:text-base">
-                    <p>{contactInfo.phone}</p>
-                    <p>{contactInfo.mobile}</p>
-                  </div>
-                </li>
-                <li className="flex items-center gap-3">
-                  <Mail className="h-5 w-5 shrink-0 text-accent" />
-                  <span className="text-sm text-gray-600 sm:text-base">
-                    {contactInfo.email}
-                  </span>
-                </li>
-              </ul>
-
-              <p className="mt-4 text-sm text-gray-500">
-                {contactInfo.workingHours}
-              </p>
-
-              <div className="mt-6 flex gap-3">
-                <a
-                  href="#"
-                  aria-label="اینستاگرام"
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-white transition-colors hover:bg-accent-hover"
-                >
-                  <InstagramIcon className="h-5 w-5" />
-                </a>
-                <a
-                  href="#"
-                  aria-label="تلگرام"
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-accent text-white transition-colors hover:bg-accent-hover"
-                >
-                  <TelegramIcon className="h-5 w-5" />
-                </a>
-              </div>
-
-              <div className="mt-10 overflow-hidden rounded-xl border border-gray-border">
-                <iframe
-                  title="موقعیت فروشگاه"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.967641462!2d51.404343!3d35.757522!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDQ1JzI3LjEiTiA1McKwMjQnMTUuNiJF!5e0!3m2!1sfa!2s!4v1234567890"
-                  width="100%"
-                  height="300"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
-            </div>
-
-            <div>
-              <h2 className="mb-6 text-xl font-bold text-navy">
-                ارسال پیام
-              </h2>
-              <form className="space-y-5">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="mb-2 block text-sm font-medium text-navy"
-                  >
-                    نام و نام خانوادگی
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    className="w-full rounded-lg border border-gray-border px-4 py-3 text-sm outline-none transition-colors focus:border-accent"
-                    placeholder="نام خود را وارد کنید"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="mb-2 block text-sm font-medium text-navy"
-                  >
-                    ایمیل
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    className="w-full rounded-lg border border-gray-border px-4 py-3 text-sm outline-none transition-colors focus:border-accent"
-                    placeholder="example@email.com"
-                    dir="ltr"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="mb-2 block text-sm font-medium text-navy"
-                  >
-                    پیام
-                  </label>
-                  <textarea
-                    id="message"
-                    rows={5}
-                    className="w-full resize-none rounded-lg border border-gray-border px-4 py-3 text-sm outline-none transition-colors focus:border-accent"
-                    placeholder="پیام خود را بنویسید..."
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full rounded-full bg-accent py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-hover sm:w-auto sm:px-10"
-                >
-                  ارسال پیام
-                </button>
-              </form>
-
-              <div className="mt-12">
-                <FAQ items={faqItems} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  );
+  return <>
+    <section className="mx-auto max-w-[1080px] px-5 pb-[245px] pt-[118px]">
+      <div className="mb-[52px] flex items-center gap-2 text-[12px] text-[#aaa]"><Link href="/">خانه</Link><ChevronLeft className="h-3 w-3"/><span className="border-b border-[#2f72b9] pb-1 text-[#2f72b9]">درباره ما</span></div>
+      <div dir="ltr" className="grid items-start gap-14 lg:grid-cols-[505px_1fr] lg:gap-[82px]">
+        <MapArtwork large />
+        <div dir="rtl" className="text-right"><h1 className="mb-[35px] text-[29px] font-bold text-[#151515]">ارتباط با کارخانه</h1><div className="divide-y divide-[#ededed]">
+          <div className="pb-[22px]"><h2 className="flex items-center gap-3 text-[20px] font-medium"><Phone strokeWidth={1.7} className="h-[21px] w-[21px]"/>شماره تماس</h2><p className="mt-3 pr-8 text-right text-[14px] leading-7 text-[#777]">۰۹۱۲۰۳۰۲۱۴۹<br/>۰۹۱۲۰۳۰۲۱۴۹</p></div>
+          <div className="py-[22px]"><h2 className="flex items-center gap-3 text-[20px] font-medium"><Clock3 strokeWidth={1.7} className="h-[21px] w-[21px]"/>ساعت پاسخگویی</h2><p className="mt-3 pr-8 text-[14px] text-[#777]">همه روزه ۱۰ الی ۲۱</p></div>
+          <div className="py-[22px]"><h2 className="flex items-center gap-3 text-[20px] font-medium"><Headphones strokeWidth={1.7} className="h-[21px] w-[21px]"/>پشتیبانی آنلاین</h2><p className="mt-3 pr-8 text-[14px] text-[#777]">ارتباط مستقیم در روبیکا</p></div>
+          <div className="pt-[22px]"><h2 className="flex items-center gap-3 text-[20px] font-medium"><MapPin strokeWidth={1.7} className="h-[21px] w-[21px]"/>آدرس کارخانه</h2><p className="mt-3 text-[14px] leading-8 text-[#777]">تهران، شهرستان بهارستان، شهر گلستان<br/>فلکه دوم خیابان داریوش سلمانی بهارستان۴ پلاک ۱۰۰</p></div>
+        </div></div>
+      </div>
+      <div className="mt-[78px] grid gap-x-[25px] gap-y-[26px] sm:grid-cols-2">{cards.map((c,index)=><a href="#" key={c.title} className="flex min-h-[150px] items-center justify-between gap-4 rounded-[14px] bg-[#f5f6f8] px-5 transition hover:-translate-y-1 hover:shadow-md sm:min-h-[174px] lg:px-[42px]"><span className="flex flex-row-reverse items-center gap-3 text-[16px] font-medium sm:text-[18px] lg:gap-4 lg:whitespace-nowrap lg:text-[20px]"><Image src="/about/Group.png" width={28} height={28} alt="" className="h-6 w-6 shrink-0 object-contain"/>{c.title}</span>{index===2?<span className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-[#22c65b] text-white"><WhatsAppIcon/></span>:c.icon}</a>)}</div>
+    </section>
+  </>;
 }
