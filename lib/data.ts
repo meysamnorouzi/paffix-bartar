@@ -1,11 +1,26 @@
+export interface ProductSpec {
+  label: string;
+  value: string;
+}
+
 export interface Product {
   id: string;
   name: string;
+  shortName: string;
   price: number;
   image: string;
+  gallery: string[];
   category: string;
+  tag: string;
   slug: string;
-  description?: string;
+  description: string;
+  saleType: string;
+  sizes: string[];
+  extraSizes?: string;
+  colors: string[];
+  features: { label: string; value: string }[];
+  specs: ProductSpec[];
+  breadcrumbCategory: string;
 }
 
 export interface Category {
@@ -65,107 +80,356 @@ export const categories: Category[] = [
 export const products: Product[] = [
   {
     id: "1",
-    name: "کفش اسپرت مردانه آدیداس",
-    price: 4850000,
-    image:
-      "https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&q=80",
+    name: "مدل اکو",
+    shortName: "اکو",
+    price: 0,
+    image: "/plp/Rectangle 39992.png",
+    gallery: ["/pdp/eco/main.png"],
     category: "men",
-    slug: "adidas-sport-men",
+    tag: "مردانه",
+    slug: "eco",
     description:
-      "کفش اسپرت با طراحی مدرن، مناسب برای پیاده‌روی روزانه و ورزش‌های سبک.",
+      "مدل اکو با رویه چرم بافت‌دار و زیره لاستیکی قهوه‌ای، انتخابی مناسب برای استفاده روزمره و استایل کژوال مردانه است.",
+    saleType: "عمده",
+    sizes: ["۴۱", "۴۲", "۴۳", "۴۴"],
+    colors: ["#111", "#e7e9e8"],
+    features: [
+      { label: "کفی", value: "اشتروبل دوخت" },
+      { label: "جنس", value: "چرم بافت‌دار" },
+    ],
+    specs: [
+      { label: "دسته بندی", value: "مردانه" },
+      { label: "قالب", value: "استاندارد" },
+      { label: "تعداد", value: "۸ جفتی" },
+      { label: "جنس زیره", value: "لاستیک قهوه‌ای" },
+      { label: "ویژگی کفی", value: "اشتروبل دوخت" },
+      { label: "جنس", value: "چرم بافت‌دار" },
+      { label: "سایز", value: "۴۱-۴۴" },
+    ],
+    breadcrumbCategory: "محصولات مردانه",
   },
   {
     id: "2",
-    name: "کفش رانینگ نایک ایر",
-    price: 6200000,
-    image:
-      "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?w=600&q=80",
-    category: "sport",
-    slug: "nike-air-running",
+    name: "مدل نایک SB",
+    shortName: "نایک SB",
+    price: 0,
+    image: "/plp/nike-sb.jpg",
+    gallery: [
+      "/pdp/nike-sb/main.jpg",
+      "/pdp/nike-sb/thumb-1.jpg",
+      "/pdp/nike-sb/thumb-2.jpg",
+      "/pdp/nike-sb/thumb-3.jpg",
+      "/pdp/nike-sb/thumb-4.jpg",
+      "/pdp/nike-sb/thumb-5.jpg",
+    ],
+    category: "men",
+    tag: "مردانه",
+    slug: "nike-sb",
     description:
-      "کفش رانینگ با کفی نرم و تهویه عالی، انتخابی ایده‌آل برای دوندگان.",
+      "مدل Nike SB به خاطر طراحی خاص و کیفیت ساخت، جایگاه ویژه‌ای در میان علاقه‌مندان به استایل خیابانی پیدا کرده است. رویه مقاوم، فرم استاندارد و زیره منعطف این مدل، تجربه‌ای راحت برای استفاده روزانه فراهم می‌کند و ظاهر اسپرت آن به‌راحتی با انواع استایل‌های کژوال هماهنگ می‌شود. Nike SB انتخابی مناسب برای افرادی است که به دنبال ترکیبی از دوام، راحتی و طراحی متفاوت هستند.",
+    saleType: "عمده",
+    sizes: ["۴۱", "۴۲", "۴۳", "۴۴"],
+    colors: ["#c45a2c", "#1a2a4a"],
+    features: [
+      { label: "کفی", value: "اشتروبل EVA" },
+      { label: "جنس", value: "سوپر اشبالت" },
+    ],
+    specs: [
+      { label: "دسته بندی", value: "مردانه" },
+      { label: "قالب", value: "استاندارد" },
+      { label: "تعداد", value: "۸ جفتی" },
+      { label: "جنس زیره", value: "زیره عطری" },
+      { label: "ویژگی کفی", value: "اشتروبل EVA" },
+      { label: "جنس", value: "سوپر اشبالت" },
+      { label: "سایز", value: "۴۱-۴۴" },
+    ],
+    breadcrumbCategory: "محصولات مردانه",
   },
   {
     id: "3",
-    name: "کفش کژوال زنانه",
-    price: 3950000,
-    image:
-      "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&q=80",
+    name: "مدل نایک V2K",
+    shortName: "نایک V2K",
+    price: 0,
+    image: "/plp/nike-v2k.png",
+    gallery: [
+      "/pdp/nike-v2k/main.png",
+      "/pdp/nike-v2k/thumb-1.png",
+      "/pdp/nike-v2k/thumb-2.png",
+      "/pdp/nike-v2k/thumb-3.png",
+      "/pdp/nike-v2k/thumb-4.png",
+      "/pdp/nike-v2k/thumb-5.png",
+    ],
     category: "women",
-    slug: "casual-women",
+    tag: "زنانه",
+    slug: "nike-v2k",
     description:
-      "کفش کژوال با استایل شیک و راحتی بالا، مناسب استفاده روزمره.",
+      "مدل Nike V2K با الهام از کفش‌های رانینگ کلاسیک طراحی شده و ظاهر نوستالژیک را با جزئیات مدرن ترکیب می‌کند. رویه مش تنفس‌پذیر در کنار لایه‌های متعدد، ظاهری منحصربه‌فرد ایجاد کرده و گردش هوا را بهبود می‌بخشد. کفی فومی ضخیم و نرم، راحتی و پایداری مناسبی هنگام پیاده‌روی فراهم می‌کند. این مدل برای استفاده روزانه، پیاده‌روی و استایل کژوال انتخابی کاربردی است.",
+    saleType: "عمده",
+    sizes: ["۳۷", "۳۸", "۳۹", "۴۰"],
+    colors: ["#f45dc0", "#55b9ee"],
+    features: [
+      { label: "کفی", value: "اشتروبل دوخت" },
+      { label: "جنس", value: "پارچه نیوبالانسی" },
+    ],
+    specs: [
+      { label: "دسته بندی", value: "زنانه" },
+      { label: "قالب", value: "استاندارد" },
+      { label: "سری", value: "۸ جفتی" },
+      { label: "جنس زیره", value: "زیره PU رنگ شده" },
+      { label: "ویژگی کفی", value: "اشتروبل دوخت" },
+      { label: "جنس", value: "رویه فوم حوله‌ای و پارچه نیوبالانسی" },
+      { label: "سایز", value: "۳۷-۴۰" },
+    ],
+    breadcrumbCategory: "محصولات زنانه",
   },
   {
     id: "4",
-    name: "کفش بسکتبال جردن",
-    price: 7500000,
-    image:
-      "https://images.unsplash.com/photo-1556906781-9a412961c28c?w=600&q=80",
+    name: "مدل نایک دراگون",
+    shortName: "نایک دراگون",
+    price: 0,
+    image: "/plp/Rectangle 39992 (5).png",
+    gallery: [
+      "/pdp/nike-dragon/main.png",
+      "/pdp/nike-dragon/thumb-1.jpg",
+      "/pdp/nike-dragon/thumb-2.jpg",
+      "/pdp/nike-dragon/thumb-3.jpg",
+      "/pdp/nike-dragon/thumb-4.jpg",
+      "/pdp/nike-dragon/thumb-5.jpg",
+    ],
     category: "sport",
-    slug: "jordan-basketball",
+    tag: "مردانه و زنانه",
+    slug: "nike-dragon",
     description:
-      "کفش بسکتبال با پشتیبانی مچ پا و طراحی حرفه‌ای برای بازی.",
+      "مدل نایک دراگون با طراحی پویا و خطوط اسپرت، مناسب استایل‌های مدرن و پرانرژی است. ساختار سبک و استاندارد، راحتی استفاده روزانه را فراهم می‌کند و فرم ارگونومیک آن از حرکت طبیعی پا پشتیبانی می‌کند. ظاهر متمایز این مدل به‌راحتی با استایل‌های کژوال و خیابانی هماهنگ می‌شود.",
+    saleType: "عمده",
+    sizes: ["۴۱", "۴۲", "۴۳", "۴۴"],
+    extraSizes: "+۴",
+    colors: ["#67847b", "#e6e8e6"],
+    features: [
+      { label: "کفی", value: "اشتروبل دوخت" },
+      { label: "جنس", value: "زیره nbr رویه ترکیبی" },
+    ],
+    specs: [
+      { label: "دسته بندی", value: "مردانه و زنانه" },
+      { label: "قالب", value: "استاندارد" },
+      { label: "تعداد", value: "۸ جفتی" },
+      { label: "جنس زیره", value: "زیره nbr" },
+      { label: "ویژگی کفی", value: "اشتروبل دوخت" },
+      { label: "جنس", value: "رویه ترکیبی" },
+      { label: "سایز", value: "۴۰-۴۴" },
+    ],
+    breadcrumbCategory: "محصولات زنانه و مردانه",
   },
   {
     id: "5",
-    name: "کفش چرم مردانه کلاسیک",
-    price: 8900000,
-    image:
-      "https://images.unsplash.com/photo-1614252239476-1f4ea8d5265f?w=600&q=80",
+    name: "مدل فشن N8",
+    shortName: "فشن N8",
+    price: 0,
+    image: "/plp/Rectangle 39992 (4).png",
+    gallery: [
+      "/pdp/fashion-n8/main.png",
+      "/pdp/fashion-n8/thumb-1.jpg",
+      "/pdp/fashion-n8/thumb-2.jpg",
+      "/pdp/fashion-n8/thumb-3.jpg",
+      "/pdp/fashion-n8/thumb-4.jpg",
+    ],
     category: "men",
-    slug: "classic-leather-men",
+    tag: "مردانه",
+    slug: "fashion-n8",
     description:
-      "کفش چرم دست‌دوز با دوام بالا، مناسب محیط‌های رسمی و نیمه‌رسمی.",
+      "مدل فشن N8 با طراحی ساده و مدرن، سبک و راحت برای استفاده روزانه است و به‌خوبی با انواع استایل‌های اسپرت و کژوال هماهنگ می‌شود.",
+    saleType: "عمده",
+    sizes: ["۴۱", "۴۲", "۴۳", "۴۴"],
+    colors: ["#111", "#e7e7e7"],
+    features: [
+      { label: "کفی", value: "اشتروبل" },
+      { label: "جنس", value: "اتوبانی ترکیبی فوم حوله‌ای" },
+    ],
+    specs: [
+      { label: "دسته بندی", value: "مردانه" },
+      { label: "قالب", value: "استاندارد" },
+      { label: "تعداد", value: "۸ جفتی" },
+      {
+        label: "جنس زیره",
+        value: "زیره PU رنگ شده بدون زرد شدگی و شکستگی",
+      },
+      { label: "ویژگی کفی", value: "اشتروبل" },
+      { label: "جنس", value: "اتوبانی ترکیبی فوم حوله‌ای" },
+      { label: "سایز", value: "۴۱-۴۴" },
+    ],
+    breadcrumbCategory: "محصولات مردانه",
   },
   {
     id: "6",
-    name: "کفش پیاده‌روی زنانه",
-    price: 4200000,
-    image:
-      "https://images.unsplash.com/photo-1605348532645-0c4abbaf1e2d?w=600&q=80",
-    category: "women",
-    slug: "walking-women",
+    name: "مدل جردن هالووین",
+    shortName: "جردن هالووین",
+    price: 0,
+    image: "/plp/Rectangle 39992 (3).png",
+    gallery: [
+      "/pdp/jordan-halloween/main.png",
+      "/pdp/jordan-halloween/thumb-1.jpg",
+      "/pdp/jordan-halloween/thumb-2.jpg",
+      "/pdp/jordan-halloween/thumb-3.jpg",
+      "/pdp/jordan-halloween/thumb-4.jpg",
+      "/pdp/jordan-halloween/thumb-5.jpg",
+    ],
+    category: "sport",
+    tag: "مردانه و زنانه",
+    slug: "jordan-halloween",
     description:
-      "کفش پیاده‌روی سبک با کفی ارگونومیک برای راحتی طولانی‌مدت.",
+      "مدل جردن هالووین انتخابی جذاب برای ست مردانه و زنانه است؛ با استایل منحصربه‌فرد و هماهنگ برای زوج‌ها، ترکیب رنگی خاص و کفی راحت برای استفاده روزانه.",
+    saleType: "عمده",
+    sizes: ["۳۷", "۳۸", "۳۹", "۴۰"],
+    extraSizes: "+۴",
+    colors: ["#111", "#724ec4"],
+    features: [
+      { label: "کفی", value: "اشتروبل دوخت" },
+      { label: "جنس", value: "رویه فوم توکیو ترکیبی" },
+    ],
+    specs: [
+      { label: "دسته بندی", value: "مردانه و زنانه" },
+      { label: "قالب", value: "استاندارد" },
+      { label: "تعداد", value: "۸ جفتی" },
+      { label: "جنس زیره", value: "nbr عطری" },
+      { label: "ویژگی کفی", value: "اشتروبل دوخت" },
+      { label: "جنس", value: "رویه فوم توکیو ترکیبی" },
+      { label: "سایز", value: "۳۷-۴۴" },
+    ],
+    breadcrumbCategory: "محصولات زنانه و مردانه",
   },
   {
     id: "7",
-    name: "کفش اسکیچرز مردانه",
-    price: 3600000,
-    image:
-      "https://images.unsplash.com/photo-1539185441755-769473a23570?w=600&q=80",
+    name: "مدل آدیداس",
+    shortName: "آدیداس",
+    price: 0,
+    image: "/plp/adidas.jpg",
+    gallery: [
+      "/pdp/adidas/main.jpg",
+      "/pdp/adidas/thumb-1.jpg",
+      "/pdp/adidas/thumb-2.jpg",
+      "/pdp/adidas/thumb-3.jpg",
+      "/pdp/adidas/thumb-4.jpg",
+      "/pdp/adidas/thumb-5.jpg",
+    ],
     category: "men",
-    slug: "skechers-men",
-    description: "کفش راحتی با فوم حافظه‌دار و طراحی مدرن.",
+    tag: "مردانه",
+    slug: "adidas",
+    description:
+      "مدل آدیداس مردانه با طراحی متعادل و ظاهر اسپرت، مناسب کسانی است که به دنبال راحتی و استایل هستند. استفاده از متریال سبک، قالب استاندارد و مناسبت برای فعالیت‌های روزانه، محل کار یا دانشگاه از ویژگی‌های این مدل است.",
+    saleType: "عمده",
+    sizes: ["۴۱", "۴۲", "۴۳", "۴۴"],
+    colors: ["#3155a8", "#fff"],
+    features: [
+      { label: "کفی", value: "اشتروبل دوخت" },
+      { label: "جنس", value: "پارچه نیوبالانسی" },
+    ],
+    specs: [
+      { label: "دسته بندی", value: "مردانه" },
+      { label: "قالب", value: "استاندارد" },
+      { label: "سری", value: "۸ جفتی" },
+      { label: "جنس زیره", value: "زیره PU رنگ شده" },
+      { label: "ویژگی کفی", value: "اشتروبل دوخت" },
+      { label: "جنس", value: "رویه فوم حوله‌ای و پارچه نیوبالانسی" },
+      { label: "سایز", value: "۴۱-۴۴" },
+    ],
+    breadcrumbCategory: "محصولات مردانه",
   },
   {
     id: "8",
-    name: "کفش نیوبالانس زنانه",
-    price: 5100000,
-    image:
-      "https://images.unsplash.com/photo-1562183241-b937ee955879?w=600&q=80",
+    name: "مدل نایک دراگون ساقدار",
+    shortName: "نایک دراگون ساقدار",
+    price: 0,
+    image: "/plp/Rectangle 39992 (7).png",
+    gallery: [
+      "/pdp/nike-dragon-high/main.png",
+      "/pdp/nike-dragon-high/thumb-1.jpg",
+      "/pdp/nike-dragon-high/thumb-2.jpg",
+      "/pdp/nike-dragon-high/thumb-3.jpg",
+      "/pdp/nike-dragon-high/thumb-4.jpg",
+      "/pdp/nike-dragon-high/thumb-5.jpg",
+    ],
     category: "women",
-    slug: "new-balance-women",
-    description: "کفش ورزشی با تعادل عالی و استایل مینیمال.",
+    tag: "زنانه",
+    slug: "nike-dragon-high",
+    description:
+      "مدل نایک دراگون ساقدار با طراحی ساق‌دار، پایداری بیشتری برای مچ پا فراهم می‌کند و استایلی مدرن و جسورانه برای استفاده خیابانی و کژوال دارد.",
+    saleType: "عمده",
+    sizes: ["۳۷", "۳۸", "۳۹", "۴۰"],
+    colors: ["#25c98e", "#f2a85d"],
+    features: [
+      { label: "کفی", value: "اشتروبل دوخت" },
+      { label: "جنس", value: "رویه ترکیبی" },
+    ],
+    specs: [
+      { label: "دسته بندی", value: "زنانه" },
+      { label: "قالب", value: "استاندارد" },
+      { label: "تعداد", value: "۸ جفتی" },
+      { label: "جنس زیره", value: "زیره Nbr" },
+      { label: "ویژگی کفی", value: "اشتروبل" },
+      { label: "جنس", value: "رویه ترکیبی" },
+      { label: "سایز", value: "۳۷-۴۰" },
+    ],
+    breadcrumbCategory: "محصولات زنانه",
+  },
+  {
+    id: "9",
+    name: "مدل کلوین کلین",
+    shortName: "کلوین کلین",
+    price: 0,
+    image: "/plp/calvin-klein.jpg",
+    gallery: [
+      "/pdp/calvin-klein/main.jpg",
+      "/pdp/calvin-klein/thumb-1.jpg",
+      "/pdp/calvin-klein/thumb-2.jpg",
+      "/pdp/calvin-klein/thumb-3.jpg",
+      "/pdp/calvin-klein/thumb-4.jpg",
+    ],
+    category: "women",
+    tag: "زنانه",
+    slug: "calvin-klein",
+    description:
+      "مدل کلوین کلین با طراحی مینیمال و شیک، مناسب بانوانی است که استایل ساده را می‌پسندند. دوخت باکیفیت، ظاهر مدرن و وزن سبک، این کفش را برای استفاده روزانه با پوشش کژوال یا نیمه‌رسمی به گزینه‌ای راحت تبدیل کرده است.",
+    saleType: "عمده",
+    sizes: ["۳۷", "۳۸", "۳۹", "۴۰"],
+    colors: ["#5d7779", "#eff2f2"],
+    features: [
+      { label: "کفی", value: "اشتروبل دوخت" },
+      { label: "جنس", value: "میکروسوییت" },
+    ],
+    specs: [
+      { label: "دسته بندی", value: "زنانه" },
+      { label: "قالب", value: "استاندارد" },
+      { label: "تعداد", value: "۸ جفتی" },
+      { label: "جنس زیره", value: "پیو باغ سپه سالار" },
+      { label: "ویژگی کفی", value: "اشتروبل دوخت" },
+      { label: "جنس", value: "رویه میکرو سوییت" },
+      { label: "سایز", value: "۳۷-۴۰" },
+    ],
+    breadcrumbCategory: "محصولات زنانه",
   },
 ];
+
+export function getProductBySlug(slug: string) {
+  return products.find((p) => p.slug === slug);
+}
+
+export function getRelatedProducts(slug: string, limit = 4) {
+  return products.filter((p) => p.slug !== slug).slice(0, limit);
+}
 
 export const collections: Collection[] = [
   {
     id: "c1",
     name: "کالکشن پاییز ۱۴۰۴",
     price: 6800000,
-    image:
-      "https://images.unsplash.com/photo-1606107557195-0a74c4b6264b?w=800&q=80",
+    image: "/plp/Rectangle 39992 (5).png",
     slug: "autumn-1404",
   },
   {
     id: "c2",
     name: "کالکشن لوکس",
     price: 12500000,
-    image:
-      "https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=800&q=80",
+    image: "/plp/Rectangle 39992 (3).png",
     slug: "luxury",
   },
 ];
