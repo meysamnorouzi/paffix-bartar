@@ -16,13 +16,7 @@ export default function Footer() {
           className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[300px_387px_262px_159px] lg:justify-between lg:gap-0"
         >
           <div className="flex h-[145px] items-center justify-center lg:items-start lg:pt-[57px]">
-            <Image
-              src="/eye/logo.png"
-              alt="پافیکس برتر"
-              width={225}
-              height={136}
-              className="h-auto w-[225px] brightness-0 invert"
-            />
+            <span className="text-[28px] font-bold tracking-wide">پافیکس برتر</span>
           </div>
 
           <section dir="rtl" className="text-center">

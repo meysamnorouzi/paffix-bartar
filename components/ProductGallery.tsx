@@ -19,9 +19,10 @@ export default function ProductGallery({ name, images }: ProductGalleryProps) {
         <Image
           src={images[active] ?? images[0]}
           alt={name}
-          width={430}
-          height={470}
+          width={966}
+          height={1048}
           priority
+          quality={95}
           className="h-full w-full object-cover"
         />
       </div>
@@ -39,8 +40,9 @@ export default function ProductGallery({ name, images }: ProductGalleryProps) {
               <Image
                 src={src}
                 alt=""
-                width={151}
-                height={92}
+                width={302}
+                height={184}
+                quality={90}
                 className="h-full w-full object-cover"
               />
             </button>

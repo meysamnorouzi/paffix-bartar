@@ -171,8 +171,9 @@ function ProductCard({
         <Image
           src={image}
           alt={name}
-          width={307}
-          height={335}
+          width={966}
+          height={1048}
+          quality={90}
           className="h-auto w-full transition duration-500 hover:scale-[1.025]"
         />
       </Link>
