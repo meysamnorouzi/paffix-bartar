@@ -97,6 +97,7 @@ export default async function ProductsPage({
               image={product.image}
               tag={product.tag}
               colors={product.colors}
+              extraColors={product.extraColors}
               slug={product.slug}
             />
           ))}
@@ -151,12 +152,14 @@ function ProductCard({
   image,
   tag,
   colors,
+  extraColors,
   slug,
 }: {
   name: string;
   image: string;
   tag: string;
   colors: string[];
+  extraColors: string;
   slug: string;
 }) {
   return (
@@ -176,7 +179,7 @@ function ProductCard({
       <h2 className="mt-[13px] text-[15px] font-medium text-[#242424]">{name}</h2>
       <div className="mt-[13px] flex items-center justify-between">
         <div className="flex items-center">
-          <span className="ml-1 text-[11px] text-[#aaa]">+۲</span>
+          <span className="ml-1 text-[11px] text-[#aaa]">{extraColors}</span>
           {colors.map((c) => (
             <i
               key={c}
