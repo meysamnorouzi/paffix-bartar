@@ -35,6 +35,7 @@ export default function ProductShowcase() {
                   fill
                   className="object-cover transition duration-500 group-hover:scale-105"
                   sizes="300px"
+                  quality={90}
                 />
                 <span className="absolute right-5 top-5 text-[14px] font-light text-[#2f72b9]">
                   {item.tag}
