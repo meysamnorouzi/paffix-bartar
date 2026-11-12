@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from "lucide-react";
 
 interface ProductGalleryProps {
   name: string;
@@ -12,53 +12,50 @@ interface ProductGalleryProps {
 export default function ProductGallery({ name, images }: ProductGalleryProps) {
   const [active, setActive] = useState(0);
   const thumbRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const current = images[active] ?? images[0];
+  const last = images.length - 1;
+  const hasPrev = active > 0;
+  const hasNext = active < last;
+
+  const go = (index: number) => setActive(Math.min(last, Math.max(0, index)));
 
   useEffect(() => {
     thumbRefs.current[active]?.scrollIntoView({
       block: "nearest",
       inline: "nearest",
+      behavior: "smooth",
     });
   }, [active]);
 
   return (
-    <div className="contents">
-      <div className="flex h-full flex-col">
-        <div className="min-h-[320px] flex-1 overflow-hidden rounded-[14px] bg-[#f4f4f4]">
-          <Image
-            src={current}
-            alt={name}
-            width={966}
-            height={1048}
-            priority
-            quality={95}
-            className="h-full w-full object-cover"
-          />
-        </div>
-        <div className="mt-2 flex gap-2 overflow-x-auto lg:hidden">
-          {images.map((src, i) => (
-            <button
-              key={src}
-              type="button"
-              onClick={() => setActive(i)}
-              className={`h-[72px] w-[72px] shrink-0 overflow-hidden rounded-[10px] ${
-                i === active ? "ring-2 ring-[#2f72b9]" : ""
-              }`}
-            >
-              <Image
-                src={src}
-                alt=""
-                width={144}
-                height={144}
-                quality={75}
-                className="h-full w-full object-cover"
-              />
-            </button>
-          ))}
-        </div>
+    <div className="flex min-w-0 flex-col gap-4 lg:flex-row-reverse lg:gap-[25px]">
+      <div className="relative aspect-[483/524] w-full overflow-hidden rounded-[16px] bg-[#e5e5e5] lg:h-[524px] lg:w-[483px] lg:shrink-0">
+        <Image
+          key={images[active]}
+          src={images[active]}
+          alt={name}
+          fill
+          sizes="(min-width: 1024px) 483px, 100vw"
+          quality={95}
+          loading="eager"
+          fetchPriority="high"
+          className="object-cover"
+        />
+        <GalleryArrow
+          side="right"
+          label="تصویر قبلی"
+          enabled={hasPrev}
+          onClick={() => go(active - 1)}
+        />
+        <GalleryArrow
+          side="left"
+          label="تصویر بعدی"
+          enabled={hasNext}
+          onClick={() => go(active + 1)}
+        />
       </div>
-      <div className="hidden lg:block">
-        <div className="max-h-[450px] space-y-[10px] overflow-y-auto">
+
+      <div className="flex flex-col gap-2 lg:h-[524px] lg:w-[150px] lg:shrink-0">
+        <div className="flex gap-4 overflow-auto [scrollbar-width:none] lg:min-h-0 lg:flex-1 lg:flex-col [&::-webkit-scrollbar]:hidden">
           {images.map((src, i) => (
             <button
               key={src}
@@ -66,43 +63,72 @@ export default function ProductGallery({ name, images }: ProductGalleryProps) {
                 thumbRefs.current[i] = node;
               }}
               type="button"
+              aria-label={`تصویر ${i + 1}`}
+              aria-current={i === active}
               onClick={() => setActive(i)}
-              className={`block h-[82px] w-[132px] overflow-hidden rounded-[12px] ${
-                i === active ? "ring-2 ring-[#2f72b9] ring-offset-2" : ""
+              className={`relative h-[72px] w-[96px] shrink-0 overflow-hidden rounded-[16px] transition-opacity lg:h-[92px] lg:w-[150px] ${
+                i === active ? "" : "opacity-80 hover:opacity-100"
               }`}
             >
               <Image
                 src={src}
                 alt=""
-                width={264}
-                height={164}
+                fill
+                sizes="150px"
                 quality={75}
-                className="h-full w-full object-cover"
+                className="object-cover"
               />
             </button>
           ))}
         </div>
-        <div className="mt-2 grid grid-cols-2 gap-2">
-          <button
-            type="button"
-            aria-label="تصویر بعدی"
-            onClick={() =>
-              setActive((i) => Math.min(images.length - 1, i + 1))
-            }
-            className="grid h-8 place-items-center rounded bg-[#f3f4f5]"
-          >
-            <ChevronDown className="h-4 w-4" />
-          </button>
+        <div className="hidden grid-cols-2 gap-2 lg:grid">
           <button
             type="button"
             aria-label="تصویر قبلی"
-            onClick={() => setActive((i) => Math.max(0, i - 1))}
-            className="grid h-8 place-items-center rounded bg-[#f3f4f5]"
+            disabled={!hasPrev}
+            onClick={() => go(active - 1)}
+            className="grid h-8 place-items-center rounded-[4px] bg-[#f1f1f3] text-[#111] transition hover:bg-[#e6e7ea] disabled:cursor-default disabled:hover:bg-[#f1f1f3]"
           >
-            <ChevronUp className="h-4 w-4" />
+            <ChevronUp className="h-4 w-4" strokeWidth={2} />
+          </button>
+          <button
+            type="button"
+            aria-label="تصویر بعدی"
+            disabled={!hasNext}
+            onClick={() => go(active + 1)}
+            className="grid h-8 place-items-center rounded-[4px] bg-[#f1f1f3] text-[#111] transition hover:bg-[#e6e7ea] disabled:cursor-default disabled:hover:bg-[#f1f1f3]"
+          >
+            <ChevronDown className="h-4 w-4" strokeWidth={2} />
           </button>
         </div>
       </div>
     </div>
+  );
+}
+
+function GalleryArrow({
+  side,
+  label,
+  enabled,
+  onClick,
+}: {
+  side: "left" | "right";
+  label: string;
+  enabled: boolean;
+  onClick: () => void;
+}) {
+  const Icon = side === "left" ? ChevronLeft : ChevronRight;
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      disabled={!enabled}
+      onClick={onClick}
+      className={`absolute top-1/2 grid h-9 w-9 -translate-y-1/2 place-items-center rounded-full text-[#111] transition ${
+        side === "left" ? "left-[15px]" : "right-[15px]"
+      } ${enabled ? "bg-[#f0f1f3] hover:bg-white" : "cursor-default"}`}
+    >
+      <Icon className="h-4 w-4" strokeWidth={2} />
+    </button>
   );
 }

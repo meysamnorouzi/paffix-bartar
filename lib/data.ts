@@ -501,14 +501,14 @@ export const collections: Collection[] = [
     id: "c1",
     name: "کالکشن پاییز ۱۴۰۴",
     price: 6800000,
-    image: "/plp/nike-dragon.png",
+    image: "/collections/autumn.webp",
     slug: "autumn-1404",
   },
   {
     id: "c2",
     name: "کالکشن لوکس",
     price: 12500000,
-    image: "/plp/jordan-halloween.png",
+    image: "/collections/luxury.webp",
     slug: "luxury",
   },
 ];
@@ -594,3 +594,23 @@ export const footerLinks = {
     { href: "#", label: "فرصت‌های شغلی" },
   ],
 };
+
+/** Products that have a studio (grey backdrop) shot used on listing cards. */
+const catalogShots = new Set([
+  "adidas",
+  "alo",
+  "calvin-klein",
+  "eco",
+  "fashion-n8",
+  "jordan-halloween",
+  "nike-dragon",
+  "nike-dragon-high",
+  "nike-sb",
+  "nike-v2k",
+  "nike-v5k",
+  "nike-vans",
+]);
+
+export function getCardImage(product: Product) {
+  return catalogShots.has(product.slug) ? `/catalog/${product.slug}.webp` : product.image;
+}

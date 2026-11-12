@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronLeft, Phone } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import {
   getProductBySlug,
@@ -10,9 +10,13 @@ import {
   type Product,
 } from "@/lib/data";
 import ManufacturingSection from "@/components/ManufacturingSection";
-import ContactSection from "@/components/ContactSection";
-import ProductTabs from "@/components/ProductTabs";
+import { ContactInfo, FaqSection } from "@/components/ContactSection";
+import CopyPhone from "@/components/CopyPhone";
 import ProductGallery from "@/components/ProductGallery";
+import ProductTabs from "@/components/ProductTabs";
+import SocialFollow from "@/components/SocialFollow";
+import { PHONE, external, social } from "@/lib/contact";
+
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -30,151 +34,143 @@ export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
   const product = getProductBySlug(slug);
   if (!product) notFound();
-  const related = getRelatedProducts(slug);
+  const related = getRelatedProducts(slug, 8);
 
   return (
     <>
-      <main className="mx-auto max-w-[1140px] px-5 pb-[110px] pt-[105px] lg:px-0">
-        <div className="flex items-center gap-2 text-[11px] text-[#aaa]">
-          <Link href="/">خانه</Link>
-          <ChevronLeft className="h-3 w-3" />
-          <Link href="/products">محصولات</Link>
-          <ChevronLeft className="h-3 w-3" />
-          <span className="border-b border-[#2f72b9] pb-1 text-[#2f72b9]">
-            {product.name}
-          </span>
+      <div className="mx-auto max-w-[1296px] px-5 pb-[221px] pt-[131px] lg:px-0">
+        <div className="lg:pl-[69px] lg:pr-[56px]">
+          <Breadcrumb product={product} />
+          <section className="mt-6 grid grid-cols-1 gap-10 lg:grid-cols-[658px_463px] lg:gap-[50px]">
+            <ProductGallery name={product.name} images={product.gallery} />
+            <ProductSummary product={product} />
+          </section>
         </div>
 
-        <section
-          dir="ltr"
-          className="mt-[22px] grid gap-6 lg:grid-cols-[410px_430px_132px] lg:justify-evenly"
-        >
-          <ProductSummary product={product} />
-          <ProductGallery name={product.name} images={product.gallery} />
-        </section>
-
         <ProductTabs product={product} related={related} />
-
-        <SocialCards />
-      </main>
+      </div>
       <ManufacturingSection />
-      <ContactSection />
+      <ContactInfo className="pb-[76px] pt-[135px]" />
+      <SocialFollow />
+      <FaqSection className="pb-[64px] pt-[53px]" />
     </>
+  );
+}
+
+function Breadcrumb({ product }: { product: Product }) {
+  return (
+    <nav aria-label="مسیر صفحه">
+      <ol className="flex flex-wrap items-center gap-[11px] text-[16px] font-light leading-[24px] text-[#6a727f]">
+        <li>
+          <Link href="/" className="transition hover:text-[#184177]">
+            خانه
+          </Link>
+        </li>
+        <li aria-hidden="true">
+          <ChevronLeft className="h-[18px] w-[18px] text-[#333]" strokeWidth={2} />
+        </li>
+        <li>
+          <Link href="/products" className="transition hover:text-[#184177]">
+            {product.breadcrumbCategory}
+          </Link>
+        </li>
+        <li aria-hidden="true">
+          <ChevronLeft className="h-[18px] w-[18px] text-[#333]" strokeWidth={2} />
+        </li>
+        <li>
+          <span
+            aria-current="page"
+            className="text-[16.5px] font-medium text-[#184177] underline decoration-1 underline-offset-[7px]"
+          >
+            {product.name}
+          </span>
+        </li>
+      </ol>
+    </nav>
   );
 }
 
 function ProductSummary({ product }: { product: Product }) {
   return (
-    <aside dir="rtl" className="text-right">
-      <h1 className="text-[22px] font-bold">{product.name}</h1>
-      <dl className="mt-5 space-y-4 text-[13px]">
-        <div className="flex justify-between">
-          <dt className="font-medium">فروش:</dt>
-          <dd className="text-[#777]">{product.saleType}</dd>
+    <aside className="min-w-0 text-right text-[#111]">
+      <h1 className="text-[20.5px] font-bold leading-[25px]">{product.name}</h1>
+
+      <dl className="mt-[11.5px] text-[18px] font-medium">
+        <div className="flex h-[32px] items-center gap-[7px]">
+          <dt>فروش:</dt>
+          <dd className="font-normal">{product.saleType}</dd>
         </div>
-        <div className="flex items-center justify-between">
-          <dt className="font-medium">سایزبندی:</dt>
-          <dd className="flex items-center gap-3">
-            {product.extraSizes ? (
-              <span className="text-[12px] text-[#999]">{product.extraSizes}</span>
-            ) : null}
-            {product.sizes.map((x) => (
-              <button
-                key={x}
-                type="button"
-                className="grid h-8 w-8 place-items-center rounded bg-[#fafafa] text-[#999]"
+        <div className="mt-[3.5px] flex items-center gap-[22px]">
+          <dt>سایزبندی:</dt>
+          <dd dir="ltr" className="flex items-center gap-[6px]">
+            {product.sizes.map((size) => (
+              <span
+                key={size}
+                className="grid h-[41px] w-[41px] place-items-center rounded-[10px] border border-[#e9ebf8] bg-[#fcfdff] text-[16px] font-normal text-[#606672]"
               >
-                {x}
-              </button>
+                {size}
+              </span>
             ))}
+            {product.extraSizes ? (
+              <span className="ml-px text-[18px] font-medium text-[#184177]">
+                {product.extraSizes}
+              </span>
+            ) : null}
           </dd>
         </div>
       </dl>
-      <div className="mt-5 rounded-[6px] border-2 border-[#2f72ff] bg-[#eaf2ff] p-[14px]">
-        <h2 className="text-[16px] font-bold">ارتباط با فروش</h2>
-        <p className="mt-1 text-[11px] text-[#777]">
-          سفارش و استعلام قیمت از طریق پیام‌رسان‌ها
+
+      <div className="mt-4 rounded-[8px] border border-r-[11px] border-[#1c5df7] bg-[#eaf1fb] px-4 pb-[35px] pt-[22px] text-center lg:pl-9 lg:pr-[33px]">
+        <h2 className="text-[16px] font-bold leading-[28px]">ارتباط با فروش</h2>
+        <p className="mt-[4px] text-[15.5px] leading-[24px] text-[#3d3d3d]">
+          سفارش و استعلام قیمت از طریق پیام رسان ها
         </p>
-        <div className="mt-3 grid grid-cols-2 gap-3">
-          <a
-            href="#"
-            className="flex h-12 items-center justify-center gap-3 rounded bg-white text-[13px]"
-          >
-            <Image
-              src="/pdp/Vector.png"
-              alt="روبیکا"
-              width={26}
-              height={26}
-            />
-            روبیکا
-          </a>
-          <a
-            href="#"
-            className="flex h-12 items-center justify-center gap-3 rounded bg-white text-[13px]"
-          >
-            <Image
-              src="/pdp/logos_telegram.png"
-              alt="تلگرام"
-              width={26}
-              height={26}
-            />
-            تلگرام
-          </a>
+        <div className="mt-[15px] grid grid-cols-[187fr_179fr] gap-4">
+          <MessengerLink href={social.rubika.href} label={social.rubika.name} icon={social.rubika.icon} />
+          <MessengerLink href={social.telegram.href} label={social.telegram.name} icon={social.telegram.icon} />
         </div>
-        <a
-          href="tel:09120302149"
-          className="mt-3 flex h-10 items-center justify-between rounded bg-white px-3 text-[11px] text-[#aaa]"
-        >
-          <span>کپی کردن شماره</span>
-          <span className="flex items-center gap-2" dir="ltr">
-            <Phone className="h-4 w-4 text-[#2f72b9]" />
-            ۰۹۱۲۰۳۰۲۱۴۹
-          </span>
-        </a>
+        <div className="mt-4">
+          <CopyPhone phone={PHONE} />
+        </div>
       </div>
-      <h2 className="mt-5 text-[15px] font-bold">ویژگی ها</h2>
-      <div className="mt-3 grid grid-cols-2 gap-3">
-        {product.features.map((f) => (
-          <div key={f.label} className="rounded bg-[#fafafa] p-4 text-center">
-            <b className="block text-[12px]">{f.label}</b>
-            <span className="mt-2 block text-[11px] text-[#777]">{f.value}</span>
-          </div>
+
+      <h2 className="mt-[13px] text-[18px] leading-[30px]">ویژگی ها</h2>
+      <ul className="mt-[8.5px] grid grid-cols-2 gap-2">
+        {product.features.map((feature) => (
+          <li
+            key={feature.label}
+            className="flex h-[72px] flex-col rounded-[8px] bg-[#f0f1f3] pl-3 pr-[18px] pt-[7.5px]"
+          >
+            <span className="text-[18px] leading-[26px]">{feature.label}</span>
+            <span className="mt-[4.5px] text-[16px] leading-[26px] text-[#3d3d3d]">{feature.value}</span>
+          </li>
         ))}
+      </ul>
+
+      <div className="mt-4 flex items-center justify-center gap-[18px] lg:pr-[13px]">
+        <span aria-hidden="true" className="hidden h-px w-[100px] shrink-0 bg-[#e9ebf8] sm:block" />
+        <a
+          href="#specs"
+          className="flex h-[44px] w-[222px] items-center justify-center gap-4 rounded-[12px] border border-[#f0f1f3] text-[17.5px] font-light text-[#3d3d3d] transition hover:border-[#1c5df7] hover:text-[#1c5df7]"
+        >
+          مشاهده همه ویژگی ها
+          <ChevronLeft className="h-[18px] w-[18px]" strokeWidth={1.75} />
+        </a>
+        <span aria-hidden="true" className="hidden h-px w-[100px] shrink-0 bg-[#e9ebf8] sm:block" />
       </div>
-      <a
-        href="#specs"
-        className="mt-4 flex items-center gap-2 text-[11px] text-[#777]"
-      >
-        مشاهده همه ویژگی ها <ChevronLeft className="h-3 w-3" />
-      </a>
     </aside>
   );
 }
 
-function SocialCards() {
-  const cards = [
-    { t: "اطلاعیه‌ها و تخفیف‌ها", src: "/pdp/Vector.png" },
-    { t: "جدیدترین محصولات", src: "/pdp/logos_telegram.png" },
-    { t: "گفتگو با کارشناسان", src: "/Vector.png" },
-    { t: "استایل‌های روز", src: "/skill-icons_instagram.png" },
-  ];
+function MessengerLink({ href, label, icon }: { href: string; label: string; icon: string }) {
   return (
-    <section className="mx-auto mt-[135px] grid max-w-[940px] gap-6 sm:grid-cols-2">
-      {cards.map((c) => (
-        <a
-          href="#"
-          key={c.t}
-          className="flex h-[155px] items-center justify-between rounded-[13px] bg-[#f5f6f8] px-9"
-        >
-          <span className="flex flex-row-reverse items-center gap-4 text-[17px] font-medium">
-            <Image src="/about/Group.png" alt="" width={28} height={28} />
-            {c.t}
-          </span>
-          <span className="grid h-16 w-16 place-items-center rounded-full bg-white">
-            <Image src={c.src} alt="" width={42} height={42} />
-          </span>
-        </a>
-      ))}
-    </section>
+    <a
+      href={href}
+      {...external}
+      className="flex h-[58px] items-center justify-center gap-3 rounded-[8px] bg-white text-[18px] transition hover:shadow-[0_4px_14px_rgba(28,93,247,0.15)]"
+    >
+      {label}
+      <Image src={icon} alt="" width={26} height={26} className="h-[26px] w-[26px]" />
+    </a>
   );
 }
