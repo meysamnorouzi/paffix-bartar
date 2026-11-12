@@ -122,13 +122,13 @@ function ProductSummary({ product }: { product: Product }) {
           </a>
         </div>
         <a
-          href="tel:09259997777"
+          href="tel:09120302149"
           className="mt-3 flex h-10 items-center justify-between rounded bg-white px-3 text-[11px] text-[#aaa]"
         >
           <span>کپی کردن شماره</span>
           <span className="flex items-center gap-2" dir="ltr">
             <Phone className="h-4 w-4 text-[#2f72b9]" />
-            ۰۹۲۵۹۹۹۷۷۷۷
+            ۰۹۱۲۰۳۰۲۱۴۹
           </span>
         </a>
       </div>
