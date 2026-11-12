@@ -24,13 +24,15 @@ export interface Product {
   breadcrumbCategory: string;
 }
 
-function productImages(slug: string, thumbs: number) {
+function productImages(slug: string, count: number) {
+  const gallery = Array.from(
+    { length: count },
+    (_, index) => `/pdp/${slug}/${String(index + 1).padStart(2, "0")}.webp`,
+  );
+
   return {
-    image: `/plp/${slug}.png`,
-    gallery: [
-      `/pdp/${slug}/main.png`,
-      ...Array.from({ length: thumbs }, (_, i) => `/pdp/${slug}/thumb-${i + 1}.png`),
-    ],
+    image: gallery[0],
+    gallery,
   };
 }
 
@@ -94,7 +96,7 @@ export const products: Product[] = [
     name: "مدل آدیداس",
     shortName: "آدیداس",
     price: 0,
-    ...productImages("adidas", 5),
+    ...productImages("adidas", 9),
     category: "men",
     tag: "مردانه",
     slug: "adidas",
@@ -124,7 +126,7 @@ export const products: Product[] = [
     name: "مدل نایک V5K",
     shortName: "نایک V5K",
     price: 0,
-    ...productImages("nike-v5k", 2),
+    ...productImages("nike-v5k", 12),
     category: "women",
     tag: "زنانه",
     slug: "nike-v5k",
@@ -154,7 +156,7 @@ export const products: Product[] = [
     name: "مدل نایک V2K",
     shortName: "نایک V2K",
     price: 0,
-    ...productImages("nike-v2k", 5),
+    ...productImages("nike-v2k", 11),
     category: "women",
     tag: "زنانه",
     slug: "nike-v2k",
@@ -184,7 +186,7 @@ export const products: Product[] = [
     name: "مدل اکو",
     shortName: "اکو",
     price: 0,
-    ...productImages("eco", 3),
+    ...productImages("eco", 7),
     category: "men",
     tag: "مردانه",
     slug: "eco",
@@ -214,7 +216,7 @@ export const products: Product[] = [
     name: "مدل فشن N8",
     shortName: "فشن N8",
     price: 0,
-    ...productImages("fashion-n8", 5),
+    ...productImages("fashion-n8", 8),
     category: "men",
     tag: "مردانه",
     slug: "fashion-n8",
@@ -247,7 +249,7 @@ export const products: Product[] = [
     name: "مدل نایک SB",
     shortName: "نایک SB",
     price: 0,
-    ...productImages("nike-sb", 5),
+    ...productImages("nike-sb", 10),
     category: "sport",
     tag: "مردانه و زنانه",
     slug: "nike-sb",
@@ -277,7 +279,7 @@ export const products: Product[] = [
     name: "مدل جردن هالووین",
     shortName: "جردن هالووین",
     price: 0,
-    ...productImages("jordan-halloween", 5),
+    ...productImages("jordan-halloween", 7),
     category: "sport",
     tag: "مردانه و زنانه",
     slug: "jordan-halloween",
@@ -339,7 +341,7 @@ export const products: Product[] = [
     name: "مدل نایک ونس",
     shortName: "نایک ونس",
     price: 0,
-    ...productImages("nike-vans", 4),
+    ...productImages("nike-vans", 7),
     category: "men",
     tag: "مردانه",
     slug: "nike-vans",
@@ -369,7 +371,7 @@ export const products: Product[] = [
     name: "مدل نایک دراگون ساقدار",
     shortName: "نایک دراگون ساقدار",
     price: 0,
-    ...productImages("nike-dragon-high", 5),
+    ...productImages("nike-dragon-high", 12),
     category: "women",
     tag: "زنانه",
     slug: "nike-dragon-high",
@@ -399,7 +401,7 @@ export const products: Product[] = [
     name: "مدل کلوین کلین",
     shortName: "کلوین کلین",
     price: 0,
-    ...productImages("calvin-klein", 5),
+    ...productImages("calvin-klein", 6),
     category: "women",
     tag: "زنانه",
     slug: "calvin-klein",
