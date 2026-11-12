@@ -5,9 +5,14 @@ import { ArrowLeft, ChevronLeft, SquareCheck } from "lucide-react";
 import { FaqSection } from "@/components/ContactSection";
 import SocialFollow from "@/components/SocialFollow";
 
+const description =
+  "پافیکس برتر با نزدیک به یک دهه تجربه و تکیه بر دانش فنی و استانداردهای دقیق تولید، کفش‌هایی بادوام، راحت و خوش‌طراحی تولید می‌کند. با ارزش‌ها و تعهد ما به کیفیت آشنا شوید.";
+
 export const metadata: Metadata = {
   title: "درباره ما",
-  description: "درباره کارخانه و ارزش‌های پافیکس برتر",
+  description,
+  alternates: { canonical: "/about/" },
+  openGraph: { title: "درباره پافیکس برتر", description, url: "/about/" },
 };
 
 const reasons = [

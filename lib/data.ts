@@ -36,59 +36,11 @@ function productImages(slug: string, count: number) {
   };
 }
 
-export interface Category {
-  id: string;
-  title: string;
-  image: string;
-  href: string;
-  span?: "wide";
-}
-
-export interface Collection {
-  id: string;
-  name: string;
-  price: number;
-  image: string;
-  slug: string;
-}
-
 export interface FAQItem {
   id: string;
   question: string;
   answer: string;
 }
-
-export const navLinks = [
-  { href: "/", label: "خانه" },
-  { href: "/products", label: "محصولات" },
-  { href: "/about", label: "درباره ما" },
-  { href: "/contact", label: "تماس با ما" },
-];
-
-export const categories: Category[] = [
-  {
-    id: "men",
-    title: "کالکشن مردانه",
-    image:
-      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80",
-    href: "/products?category=men",
-  },
-  {
-    id: "women",
-    title: "کالکشن زنانه",
-    image:
-      "https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=800&q=80",
-    href: "/products?category=women",
-  },
-  {
-    id: "sport",
-    title: "کفش‌های ورزشی و پیاده‌روی",
-    image:
-      "https://images.unsplash.com/photo-1606107557195-0a74c4b6264b?w=1200&q=80",
-    href: "/products?category=sport",
-    span: "wide",
-  },
-];
 
 export const products: Product[] = [
   {
@@ -495,105 +447,6 @@ export function getProductBySlug(slug: string) {
 export function getRelatedProducts(slug: string, limit = 4) {
   return products.filter((p) => p.slug !== slug).slice(0, limit);
 }
-
-export const collections: Collection[] = [
-  {
-    id: "c1",
-    name: "کالکشن پاییز ۱۴۰۴",
-    price: 6800000,
-    image: "/collections/autumn.webp",
-    slug: "autumn-1404",
-  },
-  {
-    id: "c2",
-    name: "کالکشن لوکس",
-    price: 12500000,
-    image: "/collections/luxury.webp",
-    slug: "luxury",
-  },
-];
-
-export const features = [
-  {
-    id: "shipping",
-    title: "ارسال رایگان",
-    description: "برای سفارش‌های بالای ۲ میلیون تومان",
-    icon: "truck" as const,
-  },
-  {
-    id: "original",
-    title: "ضمانت اصالت",
-    description: "۱۰۰٪ اورجینال و گارانتی معتبر",
-    icon: "shield" as const,
-  },
-  {
-    id: "support",
-    title: "پشتیبانی ۲۴/۷",
-    description: "پاسخگویی در تمام ساعات شبانه‌روز",
-    icon: "headphones" as const,
-  },
-  {
-    id: "payment",
-    title: "پرداخت امن",
-    description: "درگاه پرداخت معتبر و مطمئن",
-    icon: "credit-card" as const,
-  },
-];
-
-export const faqItems: FAQItem[] = [
-  {
-    id: "1",
-    question: "چگونه سفارش خود را پیگیری کنم؟",
-    answer:
-      "پس از ثبت سفارش، کد پیگیری از طریق پیامک برای شما ارسال می‌شود. همچنین می‌توانید با وارد شدن به حساب کاربری، وضعیت سفارش را مشاهده کنید.",
-  },
-  {
-    id: "2",
-    question: "آیا امکان تعویض یا بازگشت کالا وجود دارد؟",
-    answer:
-      "بله، تا ۷ روز پس از دریافت کالا، در صورت سالم بودن بسته‌بندی و عدم استفاده، امکان تعویض یا بازگشت وجود دارد.",
-  },
-  {
-    id: "3",
-    question: "زمان ارسال سفارش چقدر است؟",
-    answer:
-      "سفارش‌های تهران ۱ تا ۲ روز کاری و سایر شهرها ۳ تا ۵ روز کاری تحویل داده می‌شوند.",
-  },
-  {
-    id: "4",
-    question: "روش‌های پرداخت چیست؟",
-    answer:
-      "پرداخت آنلاین از طریق درگاه بانکی، پرداخت در محل (فقط تهران) و کارت به کارت از روش‌های موجود هستند.",
-  },
-];
-
-export const contactInfo = {
-  address: "تهران، خیابان ولیعصر، بالاتر از میدان ونک، پلاک ۱۲۳۴",
-  phone: "۰۲۱-۸۸۷۷۶۶۵۵",
-  mobile: "۰۹۱۲-۳۴۵۶۷۸۹",
-  email: "info@shoestore.ir",
-  workingHours: "شنبه تا پنج‌شنبه: ۹ صبح تا ۹ شب",
-};
-
-export const footerLinks = {
-  shop: [
-    { href: "/products", label: "همه محصولات" },
-    { href: "/products?category=men", label: "مردانه" },
-    { href: "/products?category=women", label: "زنانه" },
-    { href: "/products?category=sport", label: "ورزشی" },
-  ],
-  support: [
-    { href: "/contact", label: "تماس با ما" },
-    { href: "#", label: "شرایط بازگشت" },
-    { href: "#", label: "ارسال و تحویل" },
-    { href: "#", label: "حریم خصوصی" },
-  ],
-  company: [
-    { href: "/about", label: "درباره ما" },
-    { href: "#", label: "وبلاگ" },
-    { href: "#", label: "فرصت‌های شغلی" },
-  ],
-};
 
 /** Products that have a studio (grey backdrop) shot used on listing cards. */
 const catalogShots = new Set([

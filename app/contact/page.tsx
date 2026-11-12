@@ -5,9 +5,14 @@ import SocialFollow from "@/components/SocialFollow";
 import FactoryMap from "@/components/FactoryMap";
 import { PHONE, PHONE_FA, external, social } from "@/lib/contact";
 
+const description =
+  "راه‌های ارتباط با کارخانه پافیکس برتر: شماره تماس، ساعت پاسخگویی (همه روزه ۱۰ الی ۲۱)، پشتیبانی آنلاین در روبیکا و آدرس کارخانه در شهر گلستان، بهارستان تهران.";
+
 export const metadata: Metadata = {
   title: "ارتباط با ما",
-  description: "راه‌های ارتباط با کارخانه پافیکس برتر",
+  description,
+  alternates: { canonical: "/contact/" },
+  openGraph: { title: "ارتباط با کارخانه پافیکس برتر", description, url: "/contact/" },
 };
 
 

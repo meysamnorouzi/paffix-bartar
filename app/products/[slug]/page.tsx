@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import {
+  getCardImage,
   getProductBySlug,
   getRelatedProducts,
   products,
@@ -15,10 +16,15 @@ import CopyPhone from "@/components/CopyPhone";
 import ProductGallery from "@/components/ProductGallery";
 import ProductTabs from "@/components/ProductTabs";
 import SocialFollow from "@/components/SocialFollow";
+import JsonLd from "@/components/JsonLd";
+import { absoluteUrl } from "@/lib/site";
 import { PHONE, external, social } from "@/lib/contact";
 
 
 type Props = { params: Promise<{ slug: string }> };
+
+// Only the products known at build time exist (required for static export).
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -27,7 +33,50 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const p = getProductBySlug(slug);
-  return { title: p?.name ?? "محصول", description: p?.description };
+  if (!p) return { title: "محصول یافت نشد", robots: { index: false } };
+  const path = `/products/${p.slug}/`;
+  const description = p.description.length > 160 ? `${p.description.slice(0, 157)}…` : p.description;
+  const image = { url: getCardImage(p), alt: p.name };
+  return {
+    title: `${p.name} | فروش عمده`,
+    description,
+    keywords: [p.name, p.shortName, p.tag, "فروش عمده کفش", "پافیکس برتر"],
+    alternates: { canonical: path },
+    openGraph: { type: "website", title: p.name, description, url: path, images: [image] },
+    twitter: { card: "summary_large_image", title: p.name, description, images: [image.url] },
+  };
+}
+
+function productJsonLd(product: Product) {
+  const url = absoluteUrl(`/products/${product.slug}/`);
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "@id": `${url}#product`,
+      name: product.name,
+      description: product.description,
+      url,
+      image: [getCardImage(product), ...product.gallery].map((src) => absoluteUrl(src)),
+      category: product.tag,
+      brand: { "@type": "Brand", name: "پافیکس برتر" },
+      manufacturer: { "@id": `${absoluteUrl("/")}#organization` },
+      additionalProperty: product.specs.map((spec) => ({
+        "@type": "PropertyValue",
+        name: spec.label,
+        value: spec.value,
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "خانه", item: absoluteUrl("/") },
+        { "@type": "ListItem", position: 2, name: "محصولات", item: absoluteUrl("/products/") },
+        { "@type": "ListItem", position: 3, name: product.name, item: url },
+      ],
+    },
+  ];
 }
 
 export default async function ProductPage({ params }: Props) {
@@ -38,6 +87,7 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd data={productJsonLd(product)} />
       <div className="mx-auto max-w-[1296px] px-5 pb-[221px] pt-[131px] lg:px-0">
         <div className="lg:pl-[69px] lg:pr-[56px]">
           <Breadcrumb product={product} />
